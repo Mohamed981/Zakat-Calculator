@@ -13,41 +13,48 @@
             />
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="70,70,*,100">
-        <Entry Text="{Binding Price}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Start" WidthRequest="200"/>
-        <Entry Text="{Binding Standard}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Center" WidthRequest="200"/>
-        <ListView 
+    <Grid RowDefinitions="70,70,*,100" ColumnDefinitions="260,230,450,*,*">
+        <Label Text="Add Saving:" HorizontalOptions="Start" WidthRequest="100" HeightRequest="20"/>
+        <Entry Text="{Binding Price}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Center" WidthRequest="100" HeightRequest="20"/>
+        <Label Grid.Column="1" Text="Standard:" HorizontalOptions="Start" WidthRequest="100" HeightRequest="20"/>
+        <Entry Grid.Column="1" Text="{Binding Standard}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Center" WidthRequest="100" HeightRequest="20"/>
+        <Label Grid.Column="2" Text="Choose Currency:" HorizontalOptions="Start" WidthRequest="120" HeightRequest="20"/>
+        <ListView Grid.Column="2"
         ItemsSource="{Binding Currencies}"
-         SelectedItem="{Binding SelectedCurrency}" HorizontalOptions="End" WidthRequest="200">
+         SelectedItem="{Binding SelectedCurrency}" HeightRequest="500" HorizontalOptions="Center" WidthRequest="180">
             <ListView.ItemTemplate>
                 <DataTemplate>
-
                     <ViewCell>
                         <Grid Padding="10">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="20" />
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="70" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="2"
+                            <Image 
                            Source="{Binding Flag}" 
-                           Aspect="AspectFill"
-                           HeightRequest="30" 
-                           WidthRequest="30" />
+                           Aspect="AspectFit"
+
+                           WidthRequest="50" />
                             <Label Grid.Column="1"
                            Text="{Binding Code}" 
                            FontAttributes="Bold"
-                           HorizontalTextAlignment="End"/>
+                           HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="2"
+                           Text="{Binding Symbol}" 
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Start"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Button Grid.Row="1" Text="Add Saving" HorizontalOptions="Start" WidthRequest="200" Command="{Binding AddSavingCommand}"/>
-        <dg:DataGrid Grid.Row="2" ItemsSource="{Binding Savings}">
+        <dg:DataGrid Grid.Row="2" Grid.ColumnSpan="5" ItemsSource="{Binding Savings}">
             <dg:DataGrid.Columns>
                 <dg:DataGridColumn Title="Type" PropertyName="Code"/>
                 <dg:DataGridColumn Title="Value" PropertyName="Value" SortingEnabled="True" />
