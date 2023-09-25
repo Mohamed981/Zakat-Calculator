@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{57D24011-C24D-4227-B611-3296EB17BA4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{01EBE021-CCC6-4395-8CDC-D63206CA2C6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZakatApp", "Code\App\ZakatApp\ZakatApp.csproj", "{A904E091-F644-4B82-830C-598235483493}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A904E091-F644-4B82-830C-598235483493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A904E091-F644-4B82-830C-598235483493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A904E091-F644-4B82-830C-598235483493}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A904E091-F644-4B82-830C-598235483493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A904E091-F644-4B82-830C-598235483493}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01EBE021-CCC6-4395-8CDC-D63206CA2C6F} = {57D24011-C24D-4227-B611-3296EB17BA4B}
+		{A904E091-F644-4B82-830C-598235483493} = {01EBE021-CCC6-4395-8CDC-D63206CA2C6F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7412DD3-6E3D-4418-BBBD-9A5A8544CD4E}
+	EndGlobalSection
+EndGlobal

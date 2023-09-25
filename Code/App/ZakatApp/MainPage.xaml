@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:ZakatApp.ViewModel"
+             xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+             x:Class="ZakatApp.MainPage">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+             Command="{Binding GetCurrenciesCommand}"  
+            />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="70,70,*,100">
+        <Entry Text="{Binding Price}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Start" WidthRequest="200"/>
+        <Entry Text="{Binding Standard}" ClearButtonVisibility="WhileEditing" HorizontalOptions="Center" WidthRequest="200"/>
+        <ListView 
+        ItemsSource="{Binding Currencies}"
+         SelectedItem="{Binding SelectedCurrency}" HorizontalOptions="End" WidthRequest="200">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                           Source="{Binding Flag}" 
+                           Aspect="AspectFill"
+                           HeightRequest="30" 
+                           WidthRequest="30" />
+                            <Label Grid.Column="1"
+                           Text="{Binding Code}" 
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="End"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Text="Add Saving" HorizontalOptions="Start" WidthRequest="200" Command="{Binding AddSavingCommand}"/>
+        <dg:DataGrid Grid.Row="2" ItemsSource="{Binding Savings}">
+            <dg:DataGrid.Columns>
+                <dg:DataGridColumn Title="Type" PropertyName="Code"/>
+                <dg:DataGridColumn Title="Value" PropertyName="Value" SortingEnabled="True" />
+            </dg:DataGrid.Columns>
+            <dg:DataGrid.RowsBackgroundColorPalette>
+                <dg:PaletteCollection>
+                    <Color>#F2F2F2</Color>
+                    <Color>#FFFFFF</Color>
+                </dg:PaletteCollection>
+            </dg:DataGrid.RowsBackgroundColorPalette>
+        </dg:DataGrid>
+        <Label Grid.Row="3" Text="{Binding Result}" FontAttributes="Bold" HorizontalOptions="Center" WidthRequest="200"/>
+        <Button Grid.Row="3"  Text="Calculate Zakat" HorizontalOptions="End" WidthRequest="200" Command="{Binding PostZakatCommand}"/>
+    </Grid>
+
+</ContentPage>
