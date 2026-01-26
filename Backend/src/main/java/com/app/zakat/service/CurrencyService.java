@@ -37,14 +37,16 @@ public class CurrencyService {
 	
 	public String populateRates(String code) {
 		String url = env.getProperty("currency_url");
-		String json = restTemplate.getForObject(url + code + ".json", String.class);
-		
-		return json;
+		String json;
+        json = restTemplate.getForObject(url + code + ".json", String.class);
+
+        return json;
 	}
 	
 	public void populateDB() {
 		String url = env.getProperty("currencies_url");
-		String json = restTemplate.getForObject(url, String.class);
+        assert url != null;
+        String json = restTemplate.getForObject(url, String.class);
 		Map<String,String> currencies = null;
 		try {
 			currencies = new ObjectMapper().readValue(json, Map.class);

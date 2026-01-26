@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "currency")
+@Table(name = "currencies")
 @Data
 public class Currency {
 
