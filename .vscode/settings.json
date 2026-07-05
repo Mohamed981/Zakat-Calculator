@@ -1,3 +1,3 @@
 {
-    "dotnet.defaultSolution": "ZakatApp.sln"
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
