@@ -1,26 +1,92 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+## =========================
+## .NET / ASP.NET Core
+## =========================
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Xx]64/
+[Xx]86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+out/
+msbuild.log
+msbuild.err
+msbuild.wrn
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
 
-# Visual Studio Code
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+.nuget/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# Publish/deploy artifacts
+*.publishsettings
+PublishProfiles/
+*.pubxml
+*.azurePubxml
+
+# Rider/ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Secrets & local config overrides
+appsettings.*.local.json
+appsettings.Development.json
+secrets.json
+*.pfx
+
+# EF Core
+*.edmx.diagram
+
+## =========================
+## Angular / Node
+## =========================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Angular build output
+dist/
+tmp/
+out-tsc/
+bazel-out/
+.angular/
+.angular/cache/
+
+# Environment files (keep templates, ignore real secrets)
+src/environments/environment.*.ts
+!src/environments/environment.ts
+!src/environments/environment.prod.ts
+.env
+.env.local
+.env.*.local
+
+# IDE
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -28,15 +94,39 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
 # System files
 .DS_Store
 Thumbs.db
+
+# Testing
+/coverage/
+/karma-coverage/
+*.lcov
+
+# Cypress / Playwright
+cypress/videos/
+cypress/screenshots/
+playwright-report/
+test-results/
+
+## =========================
+## Shared / OS / Misc
+## =========================
+
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.env
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Docker
+docker-compose.override.yml
+
+# JetBrains Rider (shared with .NET section but here for monorepo root)
+.idea/
