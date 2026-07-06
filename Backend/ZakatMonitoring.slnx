@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Application/Application.csproj" />
+  <Project Path="Aspire.AppHost/Aspire.AppHost.csproj" Id="8fb72497-5843-4080-b2e8-0237118996f3" />
+  <Project Path="Aspire.ServiceDeafaults/Aspire.ServiceDeafaults.csproj" Id="da90b722-82e5-4aed-b320-d29757b1733d" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infrastructure/Infrastructure.csproj" />
+  <Project Path="ZakatMonitoring/API.csproj" />
+</Solution>
