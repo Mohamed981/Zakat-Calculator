@@ -1,0 +1,75 @@
+<section class="admin">
+  <header class="admin__header">
+    <h1>Set Currency Rates adminly</h1>
+    <p class="admin__subtitle">Add or override the exchange rate for each currency.</p>
+  </header>
+
+  <form class="admin__form" (ngSubmit)="add()">
+    <label class="control">
+      <span>Currency code</span>
+      <input
+        type="text"
+        maxlength="3"
+        placeholder="USD"
+        [ngModel]="code()"
+        (ngModelChange)="code.set($event)"
+        name="code"
+      />
+    </label>
+
+    <label class="control">
+      <span>Rate</span>
+      <input
+        type="number"
+        step="0.0001"
+        min="0"
+        placeholder="1.0000"
+        [ngModel]="rate()"
+        (ngModelChange)="rate.set($event)"
+        name="rate"
+      />
+    </label>
+
+    <button type="submit" class="btn btn--primary">Save rate</button>
+  </form>
+
+  @if (error()) {
+    <p class="admin__error">{{ error() }}</p>
+  }
+
+  <div class="admin__list">
+    <div class="admin__list-head">
+      <h2>Saved rates</h2>
+      @if (list().length) {
+        <button type="button" class="btn btn--ghost" (click)="clearAll()">Clear all</button>
+      }
+    </div>
+
+    @if (list().length) {
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Rate</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of list(); track row.code) {
+            <tr>
+              <td class="rates-table__code">{{ row.code }}</td>
+              <td>{{ row.rate | number: '1.2-4' }}</td>
+              <td>
+                <button type="button" class="btn btn--danger" (click)="remove(row.code)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="admin__empty">No admin rates set yet.</p>
+    }
+  </div>
+</section>

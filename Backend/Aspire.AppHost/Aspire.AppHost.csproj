@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="13.4.3" />
 
@@ -12,9 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.4.3" />
-    <PackageReference Include="Aspire.Hosting.Redis" Version="13.4.3" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.4.6" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.4.6" />
     <PackageReference Include="CommunityToolkit.Aspire.Hosting.NodeJS.Extensions" Version="9.9.0" />
+    <PackageReference Include="MessagePack" Version="3.1.7" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+    <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="3.1.7" />
   </ItemGroup>
 
   <ItemGroup>

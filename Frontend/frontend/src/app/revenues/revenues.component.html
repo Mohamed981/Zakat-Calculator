@@ -1,0 +1,147 @@
+<section class="revenues">
+  <header class="revenues__header">
+    <h1>Revenues</h1>
+    <p class="revenues__subtitle">Create and view revenues in different currencies.</p>
+  </header>
+
+  <form class="revenues__form" (ngSubmit)="add()">
+
+    <label class="control">
+      <span>Currency</span>
+      <select
+        [ngModel]="currencyId()"
+        (ngModelChange)="currencyId.set($event)"
+        name="currencyId"
+        [disabled]="loading()"
+      >
+        <option [ngValue]="null" disabled>Select a currency</option>
+        @for (currency of currencies(); track currency.currencyId) {
+          <option [ngValue]="currency.currencyId">
+            {{ currency.code }} — {{ currency.name }}
+          </option>
+        }
+      </select>
+    </label>
+
+    <label class="control">
+      <span>Value</span>
+      <input
+        type="number"
+        step="0.01"
+        min="0"
+        placeholder="0.00"
+        [ngModel]="value()"
+        (ngModelChange)="value.set($event)"
+        name="Value"
+      />
+    </label>
+
+    <button type="submit" class="btn btn--primary" [disabled]="saving()">
+      {{ saving() ? 'Saving…' : 'Add revenue' }}
+    </button>
+  </form>
+
+  @if (error()) {
+    <p class="revenues__status revenues__status--error">{{ error() }}</p>
+  }
+  @if (success()) {
+    <p class="revenues__status revenues__status--success">{{ success() }}</p>
+  }
+
+  <div class="revenues__list">
+    <h2>Created revenues</h2>
+
+    @if (revenues().length) {
+      <table class="revenues-table">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Value</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of revenues(); track $index) {
+            <tr>
+              <td class="revenues-table__code">{{ row.name }}</td>
+              <td>{{ row.value | number: '1.2-2' }}</td>
+              <td class="revenues-table__actions">
+                <button class="btn btn--secondary" (click)="openEdit(row)">
+                  Edit
+                </button>
+                <button class="btn btn--danger" (click)="deleteRevenue(row)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="revenues__empty">No revenues created yet.</p>
+    }
+  </div>
+
+  @if (editing()) {
+    <div class="modal-backdrop" (click)="closeEdit()">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editRevenueTitle"
+        (click)="$event.stopPropagation()"
+      >
+        <header class="modal__header">
+          <h2 id="editRevenueTitle">Edit revenue</h2>
+          <button class="modal__close" type="button" aria-label="Close" (click)="closeEdit()">
+            ×
+          </button>
+        </header>
+
+        <form class="modal__body" (ngSubmit)="saveEdit()">
+          <label class="control">
+            <span>Currency</span>
+            <select
+              [ngModel]="editCurrencyId()"
+              (ngModelChange)="editCurrencyId.set($event)"
+              name="editCurrencyId"
+            >
+              <option [ngValue]="null" disabled>Select a currency</option>
+              @for (currency of currencies(); track currency.currencyId) {
+                <option [ngValue]="currency.currencyId">
+                  {{ currency.code }} — {{ currency.name }}
+                </option>
+              }
+            </select>
+          </label>
+
+          <label class="control">
+            <span>Value</span>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="0.00"
+              [ngModel]="editValue()"
+              (ngModelChange)="editValue.set($event)"
+              name="editValue"
+            />
+          </label>
+
+          @if (editError()) {
+            <p class="revenues__status revenues__status--error">{{ editError() }}</p>
+          }
+
+          <footer class="modal__footer">
+            <button type="button" class="btn btn--secondary" (click)="closeEdit()">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn--primary" [disabled]="updating()">
+              {{ updating() ? 'Saving…' : 'Save changes' }}
+            </button>
+          </footer>
+        </form>
+      </div>
+    </div>
+  }
+</section>

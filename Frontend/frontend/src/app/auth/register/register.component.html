@@ -1,0 +1,56 @@
+<section class="register">
+  <div class="register__card">
+    <header class="register__header">
+      <h1>Create account</h1>
+      <p class="register__subtitle">Enter your details to get started.</p>
+    </header>
+
+    <form class="register__form" (ngSubmit)="submit()">
+      <label class="control">
+        <span>First name</span>
+        <input type="text" autocomplete="given-name" placeholder="Jane" [ngModel]="firstName()"
+          (ngModelChange)="firstName.set($event)" name="firstName" [disabled]="loading()" />
+      </label>
+
+      <label class="control">
+        <span>Last name</span>
+        <input type="text" autocomplete="family-name" placeholder="Doe" [ngModel]="lastName()"
+          (ngModelChange)="lastName.set($event)" name="lastName" [disabled]="loading()" />
+      </label>
+
+      <label class="control">
+        <span>Email</span>
+        <input type="email" autocomplete="email" placeholder="you@example.com" [ngModel]="email()"
+          (ngModelChange)="email.set($event)" name="email" [disabled]="loading()" />
+      </label>
+
+      <label class="control">
+        <span>Password</span>
+        <input type="password" autocomplete="new-password" placeholder="••••••••" [ngModel]="password()"
+          (ngModelChange)="password.set($event)" name="password" [disabled]="loading()" />
+      </label>
+
+      <label class="control">
+        <span>Confirm password</span>
+        <input type="password" autocomplete="new-password" placeholder="••••••••" [ngModel]="confirmPassword()"
+          (ngModelChange)="confirmPassword.set($event)" name="confirmPassword" [disabled]="loading()" />
+      </label>
+
+      @if (error() && error().length > 0) {
+      <div class="register__status-container">
+        @for (errorMessage of error(); track errorMessage) {
+        <p class="register__status register__status--error">{{ errorMessage }}</p>
+        }
+      </div>
+      }
+
+      <button type="submit" class="btn btn--primary" [disabled]="loading()">
+        {{ loading() ? 'Creating account…' : 'Create account' }}
+      </button>
+
+      <p class="register__footer">
+        Already have an account? <a routerLink="/login">Sign in</a>
+      </p>
+    </form>
+  </div>
+</section>

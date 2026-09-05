@@ -1,4 +1,3 @@
-using System.Text;
 using API.Exceptions;
 using Application;
 using Application.Behaviours;
@@ -11,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

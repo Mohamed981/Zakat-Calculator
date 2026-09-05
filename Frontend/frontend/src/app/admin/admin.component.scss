@@ -1,0 +1,149 @@
+.manual {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1f2933;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__subtitle {
+    margin: 0.35rem 0 0;
+    color: #738294;
+    font-size: 0.9rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid #e4e7eb;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  &__error {
+    margin: 0.75rem 0 0;
+    color: #c0392b;
+    font-size: 0.9rem;
+  }
+
+  &__list {
+    margin-top: 2rem;
+  }
+
+  &__list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+  }
+
+  &__empty {
+    color: #9aa5b1;
+    text-align: center;
+    padding: 1.5rem 0;
+  }
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #52606d;
+  flex: 1 1 140px;
+
+  input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd2d9;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+  }
+}
+
+.btn {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+
+  &--primary {
+    background: #2563eb;
+    color: #fff;
+
+    &:hover {
+      background: #1d4ed8;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: #52606d;
+    border: 1px solid #cbd2d9;
+
+    &:hover {
+      background: #f5f7fa;
+    }
+  }
+
+  &--danger {
+    background: #fdecea;
+    color: #c0392b;
+
+    &:hover {
+      background: #f9d7d3;
+    }
+  }
+}
+
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+  background: #fff;
+  border: 1px solid #e4e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid #eef1f4;
+    font-size: 0.95rem;
+  }
+
+  th {
+    background: #f5f7fa;
+    color: #52606d;
+    font-weight: 600;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  &__code {
+    font-weight: 600;
+    color: #3e4c59;
+  }
+}

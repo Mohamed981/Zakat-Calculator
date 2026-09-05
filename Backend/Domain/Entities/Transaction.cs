@@ -1,24 +1,25 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities;
 
-public class Transaction
+public partial class Transaction
 {
-	public int TransactionId { get; set; }
+    public int TransactionId { get; set; }
 
-	public DateTime? Date { get; set; }
+    public DateTime? Date { get; set; }
 
-	public string? Value { get; set; }
+    public string? Value { get; set; }
 
-	public int? CurrencyId { get; set; }
+    public int? CurrencyId { get; set; }
 
-	public int? RevenueId { get; set; }
+    public int? RevenueId { get; set; }
 
-	public int? UserId { get; set; }
+    public int? UserId { get; set; }
 
-	public virtual Currency? Currency { get; set; }
+    public virtual Currency? Currency { get; set; }
 
-	public virtual Revenue? Revenue { get; set; }
+    public virtual Revenue? Revenue { get; set; }
 
-	public virtual User? User { get; set; }
+    public virtual User? User { get; set; }
 }

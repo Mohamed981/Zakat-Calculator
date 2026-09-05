@@ -1,0 +1,47 @@
+<section class="currencies">
+  <header class="currencies__header">
+    <h1>Currency Exchange Rates</h1>
+    @if (date()) {
+      <p class="currencies__date">Rates as of {{ date() }}</p>
+    }
+  </header>
+
+  <div class="currencies__controls">
+    <label class="control">
+      <span>Base currency</span>
+      <select [ngModel]="base()" (ngModelChange)="onBaseChange($event)">
+        @for (b of bases; track b) {
+          <option [value]="b">{{ b }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="control">
+      <span>Search</span>
+      <input
+        type="text"
+        placeholder="e.g. EUR"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event)"
+      />
+    </label>
+  </div>
+
+  @if (loading()) {
+    <p class="currencies__status">Loading rates…</p>
+  } @else if (error()) {
+    <p class="currencies__status currencies__status--error">{{ error() }}</p>
+  } @else {
+    <div class="currencies__grid">
+      @for (rate of filteredRates(); track rate.code) {
+        <article class="card">
+          <span class="card__code">{{ rate.code }}</span>
+          <span class="card__rate">{{ rate.rate | number: '1.2-4' }}</span>
+          <span class="card__base">1 {{ base() }}</span>
+        </article>
+      } @empty {
+        <p class="currencies__status">No currencies match your search.</p>
+      }
+    </div>
+  }
+</section>

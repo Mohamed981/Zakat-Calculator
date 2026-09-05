@@ -1,0 +1,42 @@
+<section class="login">
+  <div class="login__card">
+    <header class="login__header">
+      <h1>Sign in</h1>
+      <p class="login__subtitle">Welcome back. Enter your details to continue.</p>
+    </header>
+
+    <form class="login__form" (ngSubmit)="submit()">
+      <label class="control">
+        <span>Email</span>
+        <input type="email" autocomplete="email" placeholder="you@example.com" [ngModel]="email()"
+          (ngModelChange)="email.set($event)" name="email" [disabled]="loading()" />
+      </label>
+
+      <label class="control">
+        <span>Password</span>
+        <input type="password" autocomplete="current-password" placeholder="••••••••" [ngModel]="password()"
+          (ngModelChange)="password.set($event)" name="password" [disabled]="loading()" />
+      </label>
+
+      @if (error() && error().length > 0) {
+      <div class="login__status-container">
+        @for (errorMessage of error(); track errorMessage) {
+        <p class="login__status login__status--error">{{ errorMessage }}</p>
+        }
+      </div>
+      }
+
+      <button type="submit" class="btn btn--primary" [disabled]="loading()">
+        {{ loading() ? 'Signing in…' : 'Sign in' }}
+      </button>
+
+      <button type="button" class="btn btn--google" [disabled]="loading()" (click)="loginWithGoogle()">
+        Sign in with Google
+      </button>
+
+      <p class="login__footer">
+        Don't have an account? <a routerLink="/register">Create one</a>
+      </p>
+    </form>
+  </div>
+</section>
