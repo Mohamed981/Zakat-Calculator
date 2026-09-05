@@ -10,3 +10,21 @@ jobs:
     steps:
       - name: Print message
         run: echo "Running cron job"
+  notify-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email to repo owner
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "New push to ${{ github.repository }}"
+          to: ${{ secrets.OWNER_EMAIL }}
+          from: GitHub Actions <${{ secrets.MAIL_USERNAME }}>
+          body: |
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Pushed by: ${{ github.actor }}
