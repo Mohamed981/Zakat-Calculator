@@ -1,0 +1,12 @@
+name: schedule
+
+on:
+  schedule:
+    - cron: "0/1 * * * *"
+
+jobs:
+  minute-by-minute-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Running cron job"
