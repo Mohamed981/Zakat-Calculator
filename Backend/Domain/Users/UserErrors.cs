@@ -1,4 +1,3 @@
-using System;
 using SharedKernel;
 
 namespace Domain.Users;
@@ -9,7 +8,7 @@ public static class UserErrors
 
 	public static readonly Error EmailNotUnique = Error.Conflict("Users.EmailNotUnique", "The provided email is registered before");
 
-	public static Error NotFound(Guid userId)
+	public static Error NotFound(int userId)
 	{
 		return Error.NotFound("Users.NotFound", $"The user with the Id = '{userId}' was not found");
 	}

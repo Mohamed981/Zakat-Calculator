@@ -13,6 +13,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'auth/callback', component: CallbackComponent },
   { path: 'currencies', component: CurrenciesComponent, canActivate: [authGuard] },
-  { path: 'revenues', component: RevenuesComponent},
+  { path: 'revenues', component: RevenuesComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
 ];

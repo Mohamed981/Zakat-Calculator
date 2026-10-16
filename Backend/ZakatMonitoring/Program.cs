@@ -49,6 +49,15 @@ builder.Services.AddAuthentication(options =>
         options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
         options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
         options.SignInScheme = "Cookies";
+        // Failures inside the Google handshake (consent denied, lost correlation
+        // cookie) never reach AuthController, so send them back to the login page.
+        options.Events.OnRemoteFailure = context =>
+        {
+            string frontendBaseUrl = (builder.Configuration["Frontend:BaseUrl"] ?? string.Empty).TrimEnd('/');
+            context.Response.Redirect($"{frontendBaseUrl}/login?error=sso");
+            context.HandleResponse();
+            return Task.CompletedTask;
+        };
     })
     .AddJwtBearer(options =>
     {

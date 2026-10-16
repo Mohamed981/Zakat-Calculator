@@ -11,13 +11,11 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class RequestService {
 	private isBrowser: boolean;
-	token: string | null = null;
 	lang: string | null = null;
     constructor(
         private http: HttpClient, private _router: Router, @Inject(PLATFORM_ID) private platformId: object) {
 			this.isBrowser = isPlatformBrowser(this.platformId);
 			if(this.isBrowser){
-			this.token = localStorage.getItem('accessToken');
 			this.lang = localStorage.getItem('language');
 		}
     }
@@ -32,12 +30,11 @@ export class RequestService {
     }
 
     private jwt() {
-		// create authorization header with jwt token
-		
-        if (this.token || this.lang) {
+		// The session is carried by the HttpOnly ACCESS_TOKEN cookie, which the
+		// browser sends on its own, so no Authorization header is needed.
+        if (this.lang) {
             const headers = new HttpHeaders({
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.token,
 				'Accept-Language':this.lang,
 				// 'cashe': 'false',
 				// 'foobar': '' + new Date().getTime() + '',

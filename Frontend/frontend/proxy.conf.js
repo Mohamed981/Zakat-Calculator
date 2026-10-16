@@ -11,7 +11,7 @@
 const target =
   process.env['services__api__https__0'] ||
   process.env['services__api__http__0'] ||
-  'https://localhost:7154';
+  'https://localhost:7080'; // ZakatMonitoring launchSettings.json "https" profile
 
 module.exports = {
   '/api': {

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +11,9 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   protected readonly title = signal('Angular-21');
 
-  constructor(private http: HttpClient) {}
+  constructor(protected auth: AuthService, private _router: Router) {}
+
+  logout(): void {
+    this.auth.logout().subscribe(() => this._router.navigate(['/login']));
+  }
 }

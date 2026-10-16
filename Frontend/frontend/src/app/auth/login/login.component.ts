@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Error } from '../../core/models/response';
 
@@ -13,7 +13,12 @@ import { Error } from '../../core/models/response';
 })
 export class LoginComponent {
 
-  constructor(private _auth: AuthService, private _router: Router) {}
+  constructor(private _auth: AuthService, private _router: Router, route: ActivatedRoute) {
+    // The API redirects here with ?error=sso when Google sign-in fails.
+    if (route.snapshot.queryParamMap.get('error') === 'sso') {
+      this.error.set(['Google sign-in failed. Please try again.']);
+    }
+  }
 
   email = signal<string>('');
   password = signal<string>('');
@@ -41,9 +46,14 @@ export class LoginComponent {
     }
 
     this.loading.set(true);
-    this._auth.login({ returnUrl: '/revenues' }).subscribe({
-      next: () => {
+    this._auth.login({ email, password }).subscribe({
+      next: (user) => {
         this.loading.set(false);
+        if (!user) {
+          // The login call succeeded but /auth/me did not see the session cookie.
+          this.error.set(['Signed in, but the session could not be confirmed. Please try again.']);
+          return;
+        }
         this._router.navigate(['/revenues']);
       },
       error: (errors: Error[]) => {
@@ -51,16 +61,6 @@ export class LoginComponent {
         this.loading.set(false);
       },
     });
-    // this._auth.login({ email, password }).subscribe({
-    //   next: () => {
-    //     this.loading.set(false);
-    //     this._router.navigate(['/revenues']);
-    //   },
-    //   error: (errors: Error[]) => {
-    //     this.error.set(errors.map(err=> err.description));
-    //     this.loading.set(false);
-    //   },
-    // });
   }
 
   loginWithGoogle(): void {

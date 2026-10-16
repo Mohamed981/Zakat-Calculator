@@ -1,1 +1,7 @@
+@if (auth.user(); as user) {
+<header class="session-bar">
+  <span class="session-bar__user">{{ user.name || user.email }}</span>
+  <button type="button" class="session-bar__logout" (click)="logout()">Sign out</button>
+</header>
+}
 <router-outlet></router-outlet>

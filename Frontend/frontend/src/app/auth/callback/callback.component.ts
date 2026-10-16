@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 /**
- * Landing target for backend-driven SSO. The API redirects here with the app JWT
- * in the URL fragment (#token=...); we persist it and forward to the app.
+ * Landing target for backend-driven SSO. The API has already set the session
+ * cookie before redirecting here; confirm it via /api/auth/me and forward to the app.
  */
 @Component({
   selector: 'app-auth-callback',
@@ -29,16 +29,8 @@ export class CallbackComponent implements OnInit {
       return;
     }
 
-    const fragment = window.location.hash.startsWith('#')
-      ? window.location.hash.slice(1)
-      : window.location.hash;
-    const token = new URLSearchParams(fragment).get('token');
-
-    if (token) {
-      this._auth.setToken(token);
-      this._router.navigate(['/revenues']);
-    } else {
-      this._router.navigate(['/login']);
-    }
+    this._auth.loadCurrentUser().subscribe((user) => {
+      this._router.navigate([user ? '/revenues' : '/login']);
+    });
   }
 }
